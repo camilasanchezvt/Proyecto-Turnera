@@ -5,9 +5,9 @@ import { NgForm } from '@angular/forms';
 import { Turno } from '../../model/turno';
 
 @Component({
-  selector: 'app-turno',                 // ✅ CORREGIDO: Selector correcto
-  templateUrl: './turno.component.html',  // ✅ CORREGIDO: Template correcto
-  styleUrls: ['./turno.component.css']   
+  selector: 'app-turno',                 // ✅ CORREGIDO: Selector correcto
+  templateUrl: './turno.component.html',  // ✅ CORREGIDO: Template correcto
+  styleUrls: ['./turno.component.css']   
 })
 export class TurnoComponent implements OnInit { // ✅ NOMBRE DE CLASE CORREGIDO
 
@@ -23,18 +23,30 @@ export class TurnoComponent implements OnInit { // ✅ NOMBRE DE CLASE CORREGIDO
     secondaryDark: '#B8922C', accent: '#A8C5A3', light: '#F2D9D0',
     lighter: '#FFF8F5', text: '#4A3831',
   };
-
-  services = [
-    { name: 'Manicura Semi-permanente', duration: '60 min', price: '$22.000' },
-    { name: 'Uñas Esculpidas', duration: '90 min', price: '$32.200' },
-    { name: 'Pedicura Spa', duration: '60 min', price: '$40.000' },
-    { name: 'Kapping', duration: '60 min', price: '$24.000' },
-  ];
+services = [
+  { name: 'Esmaltado Semi Permanente', price: '$22.000' },
+  { name: 'Esmaltado Semi Permanente en Pies', price: '$22.000' },
+  { name: 'Kapping', price: '$24.000' },
+  { name: 'Esculpidas en Acrigel', price: '$34.000' },
+  { name: 'Soft Gel', price: '$28.000' },
+];
 
   turnos: Turno[] = [];
 
+  // ✅ Variable agregada para manejar el evento de instalación PWA
+  private deferredPrompt: any;
+
   constructor() { }
-  ngOnInit(): void { }
+
+  ngOnInit(): void {
+    // ✅ Escucha el evento "beforeinstallprompt"
+    // Este evento se dispara cuando la app puede ser instalada (solo en navegadores compatibles)
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();             // Previene que se muestre automáticamente
+      this.deferredPrompt = event;        // Guarda el evento para usarlo después
+      console.log('App lista para instalar'); // Log para confirmar que funciona
+    });
+  }
 
   // === MÉTODOS AGREGADOS (Resuelve errores de función y lógica) ===
 
@@ -46,9 +58,8 @@ export class TurnoComponent implements OnInit { // ✅ NOMBRE DE CLASE CORREGIDO
   closeModal(): void {
     this.showModal = false;
   }
-// ... (código anterior)
 
-reservarTurno(form: NgForm): void {
+  reservarTurno(form: NgForm): void {
     if (form.invalid) {
       console.error('Formulario no válido.');
       return;
@@ -73,6 +84,7 @@ reservarTurno(form: NgForm): void {
     this.closeModal(); 
     this.activeTab = 'misTurnos'; 
   }
+
   // Métodos existentes (actualizados si fue necesario)
   addTurno(serviceName: string) { }
   
@@ -87,5 +99,23 @@ reservarTurno(form: NgForm): void {
 
   hoverLeave(event: Event) {
     (event.target as HTMLElement).style.backgroundColor = this.colors.secondary;
+  }
+
+  // ✅ Método que dispara la instalación de la app
+  // Este método se llama cuando el usuario toca el botón “Descargar”
+  instalarApp(): void {
+    if (this.deferredPrompt) {
+      this.deferredPrompt.prompt(); // Muestra el diálogo de instalación
+      this.deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('✅ Usuario instaló la app');
+        } else {
+          console.log('Usuario canceló la instalación');
+        }
+        this.deferredPrompt = null; // Limpia la variable después del intento
+      });
+    } else {
+      alert('Esta app ya está instalada o no es compatible.');
+    }
   }
 }

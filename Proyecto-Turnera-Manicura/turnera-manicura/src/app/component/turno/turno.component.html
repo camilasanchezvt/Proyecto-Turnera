@@ -24,56 +24,83 @@
     </div>
 </section>
 
-<!-- SERVICIOS -->
+<!-- SERVICIOS --> 
 <section class="container mx-auto p-4" *ngIf="activeTab==='servicios'">
-    <h3 class="text-lg font-semibold mb-4">💅 Servicios Disponibles</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <h3 class="text-lg font-semibold mb-4">💅 Servicios Disponibles</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-        <!-- Servicio 1 -->
-        <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
-            <img src="assets/imagenes/imagen1.jpg" alt="Manicura" class="service-img">
-            <h4 class="font-bold mt-2">{{ services[0].name }}</h4>
-            <p>{{ services[0].duration }} - {{ services[0].price }}</p>
-            <button class="mt-2 px-4 py-2 rounded text-white"
-                [style.background-color]="colors.secondary"
-                (mouseenter)="hoverEnter($event)"
-                (mouseleave)="hoverLeave($event)"
-                (click)="abrirModal(services[0].name)">
-                Reservar
-            </button>
-        </div>
-
-        <!-- Servicio 2 -->
-        <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
-            <img src="assets/imagenes/imagen2.jpg" alt="Pedicura" class="service-img">
-            <h4 class="font-bold mt-2">{{ services[1].name }}</h4>
-            <p>{{ services[1].duration }} - {{ services[1].price }}</p>
-            <button class="mt-2 px-4 py-2 rounded text-white"
-                [style.background-color]="colors.secondary"
-                (mouseenter)="hoverEnter($event)"
-                (mouseleave)="hoverLeave($event)"
-                (click)="abrirModal(services[1].name)">
-                Reservar
-            </button>
-        </div>
-
-        <!-- Servicio 3 -->
-        <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
-            <img src="assets/imagenes/imagen3.jpg" alt="Combo" class="service-img">
-            <h4 class="font-bold mt-2">{{ services[2].name }}</h4>
-            <p>{{ services[2].duration }} - {{ services[2].price }}</p>
-            <button class="mt-2 px-4 py-2 rounded text-white"
-                [style.background-color]="colors.secondary"
-                (mouseenter)="hoverEnter($event)"
-                (mouseleave)="hoverLeave($event)"
-                (click)="abrirModal(services[2].name)">
-                Reservar
-            </button>
-        </div>
-
+    <!-- Servicio 1 -->
+    <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
+      <!-- <img src="assets/imagenes/imagen1.jpg" alt="Esmaltado semi permanente" class="service-img"> -->
+      <h4 class="font-bold mt-2">{{ services[0].name }}</h4>
+      <p> {{ services[0].price }}</p>
+      <button class="mt-2 px-4 py-2 rounded text-white"
+        [style.background-color]="colors.secondary"
+        (mouseenter)="hoverEnter($event)"
+        (mouseleave)="hoverLeave($event)"
+        (click)="abrirModal(services[0].name)">
+        Reservar
+      </button>
     </div>
-</section>
 
+    <!-- Servicio 2 -->
+    <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
+      <!-- <img src="assets/imagenes/imagen2.jpg" alt="Esmaltado semi permanente en pies" class="service-img"> -->
+      <h4 class="font-bold mt-2">{{ services[1].name }}</h4>
+      <p> {{ services[1].price }}</p>
+      <button class="mt-2 px-4 py-2 rounded text-white"
+        [style.background-color]="colors.secondary"
+        (mouseenter)="hoverEnter($event)"
+        (mouseleave)="hoverLeave($event)"
+        (click)="abrirModal(services[1].name)">
+        Reservar
+      </button>
+    </div>
+
+    <!-- Servicio 3 -->
+    <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
+      <!-- <img src="assets/imagenes/imagen3.jpg" alt="Kapping" class="service-img"> -->
+      <h4 class="font-bold mt-2">{{ services[2].name }}</h4>
+      <p>{{ services[2].price }}</p>
+      <button class="mt-2 px-4 py-2 rounded text-white"
+        [style.background-color]="colors.secondary"
+        (mouseenter)="hoverEnter($event)"
+        (mouseleave)="hoverLeave($event)"
+        (click)="abrirModal(services[2].name)">
+        Reservar
+      </button>
+    </div>
+
+    <!-- Servicio 4 -->
+    <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
+      <!-- <img src="assets/imagenes/imagen4.jpg" alt="Esculpidas en acrigel" class="service-img"> -->
+      <h4 class="font-bold mt-2">{{ services[3].name }}</h4>
+      <p>{{ services[3].price }}</p>
+      <button class="mt-2 px-4 py-2 rounded text-white"
+        [style.background-color]="colors.secondary"
+        (mouseenter)="hoverEnter($event)"
+        (mouseleave)="hoverLeave($event)"
+        (click)="abrirModal(services[3].name)">
+        Reservar
+      </button>
+    </div>
+
+    <!-- Servicio 5 -->
+    <div class="border p-4 rounded shadow" [style.background-color]="colors.light">
+      <!-- <img src="assets/imagenes/imagen5.jpg" alt="Soft Gel" class="service-img"> -->
+      <h4 class="font-bold mt-2">{{ services[4].name }}</h4>
+      <p>{{ services[4].price }}</p>
+      <button class="mt-2 px-4 py-2 rounded text-white"
+        [style.background-color]="colors.secondary"
+        (mouseenter)="hoverEnter($event)"
+        (mouseleave)="hoverLeave($event)"
+        (click)="abrirModal(services[4].name)">
+        Reservar
+      </button>
+    </div>
+
+  </div>
+</section>
 <!-- MIS TURNOS -->
 <section class="container mx-auto p-4 mt-8" *ngIf="activeTab==='misTurnos'">
     <h3 class="text-lg font-semibold mb-4">Mis Turnos ({{ turnos.length }})</h3>
@@ -124,9 +151,12 @@
 
 <!-- FOOTER -->
 <footer [style.background-color]="colors.primary" class="text-white text-center p-4 mt-8">
-    <p>Belleza y elegancia en cada detalle</p>
-    <button class="mt-2 px-4 py-2 rounded bg-yellow-400 text-black font-bold hover:bg-yellow-500 transition">
-        Descargar
-    </button>
-    <p>© 2025 Flower Nail Beauty. Todos los derechos reservados.</p>
+  <p>Belleza y elegancia en cada detalle</p>
+
+  <!-- BOTÓN DE DESCARGA -->
+  <button 
+    (click)="instalarApp()" 
+    class="mt-3 px-6 py-2 rounded-full bg-yellow-400 text-black font-bold hover:bg-yellow-500 transition shadow-md">Descargar App</button>
+
+  <p class="mt-3">© 2025 Flower Nail Beauty. Todos los derechos reservados.</p>
 </footer>
