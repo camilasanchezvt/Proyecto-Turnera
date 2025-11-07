@@ -2,14 +2,21 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 // 1. 🟢 Importar CORS para permitir comunicación con Angular
+/// 1. 🟢 Importar CORS para permitir comunicación con Angular
 const cors = require('cors'); 
-
 const app = express();
 
-// 2. 🟢 MIDDLEWARES
-app.use(cors()); // Permite peticiones desde el frontend de Angular
-app.use(express.json());
+// Obtener la URL permitida desde las Variables de Entorno de Render
+const allowedOrigin = process.env.CORS_ORIGIN || 'http://localhost:4200'; // Fallback para desarrollo
 
+const corsOptions = {
+    origin: allowedOrigin,
+    optionsSuccessStatus: 200 // Para navegadores antiguos
+};
+
+// 2. 🟢 MIDDLEWARES
+app.use(cors(corsOptions)); // <-- Usa la configuración restringida
+app.use(express.json());
 // Nombre del archivo de "base de datos"
 const DB_FILE = 'turnos.json';
 
