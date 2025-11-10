@@ -30,10 +30,10 @@ export class AppComponent {
 
   // Lista de servicios disponibles
   services = [
-    { name: 'Manicura Semi-permanente', duration: '60 min', price: '$22.000' },
-    { name: 'Uñas Esculpidas', duration: '90 min', price: '$32.200' },
-    { name: 'Pedicura Spa', duration: '60 min', price: '$40.000' },
-    { name: 'Kapping', duration: '60 min', price: '$24.000' },
+    { name: 'Manicura Semi-permanente', price: '$22.000' },
+    { name: 'Uñas Esculpidas', price: '$32.200' },
+    { name: 'Pedicura Spa' , price: '$40.000' },
+    { name: 'Kapping', price: '$24.000' },
   ];
 
   // Array donde se almacenan los turnos del usuario

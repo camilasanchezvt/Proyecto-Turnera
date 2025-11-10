@@ -100,8 +100,8 @@ h6 {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background-color: #fff;
-    color: #D9928A;
+    background-color: #D9928A; /* antes era #fff */
+    color: #fff;               /* antes era #D9928A */
     cursor: pointer;
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
@@ -113,8 +113,9 @@ h6 {
 }
 
 .hero-section .nav-buttons button.active {
-    background-color: #D9928A;
-    color: #fff;
+    background-color: #fff;
+    color: #D9928A;
+    border: 2px solid #fff; 
 }
 
 .hero-section .horarios {
@@ -341,6 +342,7 @@ footer button {
     font-weight: 600;
     transition: background-color 0.2s ease;
 }
+
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {

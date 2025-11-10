@@ -66,19 +66,17 @@ services = [
     }
     
     // Mapeo final que coincide con el modelo corregido
-    const nuevoTurno: Turno = {
-      id: Math.random().toString(36).substring(2, 9), 
-      servicio: this.servicioSeleccionado,
-      nombre: form.value.name,
-      telefono: form.value.phone, // Ahora existe en el modelo
-      
-      // Campos que se inician o provienen del formulario:
-      apellido: '',                  
-      fecha: form.value.date,        
-      hora: form.value.time,         
-      conQuien: '',                  
-      status: 'pending'              // Ahora existe en el modelo
-    };
+  const nuevoTurno: Turno = {
+  id: Math.random().toString(36).substring(2, 9),
+  servicio: this.servicioSeleccionado,
+  nombre: form.value.name,
+  apellido: form.value.lastname,   // ⚠ deberías agregar este campo al formulario
+  telefono: form.value.phone,
+  fecha: form.value.date,
+  hora: form.value.time,
+  conQuien: form.value.staff, // ⚠ si elige con quién atenderse
+  status: 'pending'
+};
 
     this.turnos.push(nuevoTurno);
     this.closeModal(); 

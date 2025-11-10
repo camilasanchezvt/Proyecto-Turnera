@@ -110,19 +110,25 @@
     </div>
 
     <div *ngFor="let turno of turnos"
-         class="border p-4 mb-2 rounded shadow"
-         [style.background-color]="colors.lighter">
-        <h4>{{ turno.servicio }}</h4>
-        <p>
-            {{ turno.nombre }} {{ turno.apellido }} -
-            {{ turno.fecha | date:'shortDate' }} {{ turno.hora }}
-            con {{ turno.conQuien }}
-        </p>
-        <button (click)="deleteTurno(turno.id)"
-                class="bg-red-500 text-white px-2 py-1 rounded">
-            Eliminar
-        </button>
-    </div>
+     class="turno-card border p-4 mb-3 rounded shadow-sm">
+  <h4>{{ turno.servicio }}</h4>
+
+  <p *ngIf="turno.nombre || turno.apellido">
+    <strong>Cliente:</strong> {{ turno.nombre }} {{ turno.apellido }}
+  </p>
+
+  <p *ngIf="turno.fecha || turno.hora">
+    <strong>Fecha:</strong> {{ turno.fecha | date:'shortDate' }} - {{ turno.hora }}
+  </p>
+
+  <p *ngIf="turno.conQuien">
+    <strong>Con:</strong> {{ turno.conQuien }}
+  </p>
+
+  <button (click)="deleteTurno(turno.id)" class="bg-red-500 text-white px-2 py-1 rounded">
+    Eliminar
+  </button>
+</div>
 </section>
 
 <!-- MODAL -->
@@ -139,9 +145,7 @@
 
             <select name="conQuien" ngModel required>
                 <option value="">Selecciona profesional</option>
-                <option value="Ana">Ana</option>
-                <option value="María">María</option>
-                <option value="Sofía">Sofía</option>
+                <option value="Florencia">Florencia</option>
             </select>
 
             <button type="submit" [disabled]="!formTurno.form.valid">Confirmar</button>
