@@ -27,18 +27,29 @@ export class TurnoComponent implements OnInit {
   ];
 
   turnos: Turno[] = [];
-  private deferredPrompt: any;
+  private deferredPrompt: any = null;
+  instalarDisponible: boolean = false;
 
   // Horas y minutos para el select
   horas: string[] = Array.from({ length: 12 }, (_, i) => String(i + 9).padStart(2, '0'));
   minutos: string[] = Array.from({ length: 12 }, (_, i) => String(i * 5).padStart(2, '0'));
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    window.addEventListener('beforeinstallprompt', (event) => {
+    // Escucha el evento para permitir instalación PWA
+    window.addEventListener('beforeinstallprompt', (event: Event) => {
       event.preventDefault();
       this.deferredPrompt = event;
+      this.instalarDisponible = true; // ahora se puede mostrar el botón
+      console.log('✅ Evento de instalación detectado');
+    });
+
+    // Escucha si la app ya está instalada
+    window.addEventListener('appinstalled', () => {
+      console.log('✅ Aplicación instalada');
+      this.deferredPrompt = null;
+      this.instalarDisponible = false;
     });
   }
 
@@ -98,11 +109,22 @@ export class TurnoComponent implements OnInit {
   }
 
   instalarApp(): void {
-    if (this.deferredPrompt) {
-      this.deferredPrompt.prompt();
-      this.deferredPrompt.userChoice.then(() => {
-        this.deferredPrompt = null;
-      });
+    if (!this.deferredPrompt) {
+      alert('La instalación no está disponible en este momento.');
+      return;
     }
+
+    // Muestra el prompt de instalación
+    this.deferredPrompt.prompt();
+
+    this.deferredPrompt.userChoice.then((choiceResult: any) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('El usuario aceptó instalar la app');
+      } else {
+        console.log('El usuario canceló la instalación');
+      }
+      this.deferredPrompt = null;
+      this.instalarDisponible = false;
+    });
   }
 }
