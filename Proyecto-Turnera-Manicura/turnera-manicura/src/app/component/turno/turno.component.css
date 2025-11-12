@@ -11,6 +11,9 @@ body {
     font-family: 'Nunito', sans-serif;
     background-color: #fff;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* --- TODOS LOS TITULOS --- */
@@ -32,7 +35,6 @@ h6 {
     justify-content: space-between;
     background-color: #D9928A;
     padding: 15px 25px;
-    font-family: 'Nunito', sans-serif;
     color: white;
     position: fixed;
     top: 0;
@@ -48,7 +50,6 @@ h6 {
     gap: 10px;
 }
 
-/* --- LOGO --- */
 .header-logo-title img {
     width: 55px;
     height: 55px;
@@ -56,30 +57,23 @@ h6 {
     object-fit: cover;
 }
 
-/* --- TÍTULO PRINCIPAL --- */
 .header-logo-title h1 {
-    font-family: 'Nunito', sans-serif;
     font-weight: 600;
     font-size: 1.8rem;
     color: white;
-    margin: 0;
 }
 
 /* --- HERO SECTION --- */
 .hero-section {
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
     padding: 120px 0 35px;
     gap: 15px;
     text-align: center;
     background-color: #E9B1A5;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 0;
 }
 
 .hero-section h2 {
@@ -100,27 +94,26 @@ h6 {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background-color: #D9928A; /* antes era #fff */
-    color: #fff;               /* antes era #D9928A */
+    background-color: #D9928A;
+    color: #fff;
     cursor: pointer;
-    font-family: 'Nunito', sans-serif;
     font-weight: 600;
     transition: 0.2s;
 }
 
 .hero-section .nav-buttons button:hover {
     background-color: #f0f0f0;
+    color: #D9928A;
 }
 
 .hero-section .nav-buttons button.active {
     background-color: #fff;
     color: #D9928A;
-    border: 2px solid #fff; 
+    border: 2px solid #fff;
 }
 
 .hero-section .horarios {
     font-size: 0.9rem;
-    font-weight: 400;
     color: #fff;
 }
 
@@ -196,7 +189,7 @@ h3::before {
     transform: scale(1.03);
 }
 
-/* Botón Reservar */
+/* --- BOTÓN RESERVAR --- */
 button {
     cursor: pointer;
     border: none;
@@ -237,7 +230,6 @@ button.mt-2:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 450px;
-    position: relative;
     text-align: center;
 }
 
@@ -254,7 +246,6 @@ button.mt-2:hover {
     margin-bottom: 10px;
     border-radius: 6px;
     border: 1px solid #ddd;
-    font-family: 'Nunito', sans-serif;
 }
 
 .modal-content button[type="submit"] {
@@ -285,6 +276,8 @@ section.mt-8 {
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 30px;
+    /* más controlado */
 }
 
 section.mt-8 h3 {
@@ -304,7 +297,6 @@ section.mt-8 div.border:hover {
     transform: translateY(-3px);
 }
 
-/* Botón eliminar */
 button.bg-red-500 {
     background-color: #E57373;
     color: #fff;
@@ -325,7 +317,8 @@ footer {
     padding: 20px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    margin-top: 40px;
+    margin-top: auto;
+    /* ✅ lo empuja al fondo sin dejar espacio */
     font-size: 0.9rem;
     display: flex;
     flex-direction: column;
@@ -343,6 +336,9 @@ footer button {
     transition: background-color 0.2s ease;
 }
 
+footer button:hover {
+    background-color: #f4f4f4;
+}
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
