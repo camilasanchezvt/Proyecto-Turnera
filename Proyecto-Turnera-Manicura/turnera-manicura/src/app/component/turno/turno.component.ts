@@ -46,6 +46,12 @@ export class TurnoComponent implements OnInit {
     const dd = String(fechaHoy.getDate()).padStart(2, '0');
     this.fechaMinima = `${yyyy}-${mm}-${dd}`;
 
+    // Cargar turnos guardados en localStorage
+    const turnosGuardados = localStorage.getItem('turnos');
+    if (turnosGuardados) {
+      this.turnos = JSON.parse(turnosGuardados);
+    }
+
     // PWA events
     window.addEventListener('beforeinstallprompt', (event: Event) => {
       event.preventDefault();
@@ -98,6 +104,18 @@ export class TurnoComponent implements OnInit {
 
     const horaCompleta = `${form.value.hora}:${form.value.minutos}`;
 
+    // Bloqueo de turnos superpuestos
+    const turnoExistente = this.turnos.find(t =>
+      t.fecha === form.value.fecha &&
+      t.hora === horaCompleta &&
+      t.conQuien === form.value.conQuien
+    );
+
+    if (turnoExistente) {
+      alert('⚠️ Este turno ya está reservado. ⚠️');
+      return;
+    }
+
     const nuevoTurno: Turno = {
       id: Math.random().toString(36).substring(2, 9),
       servicio: this.servicioSeleccionado,
@@ -110,18 +128,10 @@ export class TurnoComponent implements OnInit {
       status: 'pending'
     };
 
-    const turnoExistente = this.turnos.find(t =>
-      t.fecha === nuevoTurno.fecha &&
-      t.hora === nuevoTurno.hora &&
-      t.conQuien === nuevoTurno.conQuien
-    );
-
-    if (turnoExistente) {
-      alert('⚠️ Este turno ya está reservado. ⚠️');
-      return;
-    }
-
     this.turnos.push(nuevoTurno);
+    // Guardar en localStorage
+    localStorage.setItem('turnos', JSON.stringify(this.turnos));
+
     this.closeModal();
     this.activeTab = 'misTurnos';
   }
@@ -129,6 +139,7 @@ export class TurnoComponent implements OnInit {
   deleteTurno(id?: string): void {
     if (!id) return;
     this.turnos = this.turnos.filter(t => t.id !== id);
+    localStorage.setItem('turnos', JSON.stringify(this.turnos));
   }
 
   hoverEnter(event: Event): void {
