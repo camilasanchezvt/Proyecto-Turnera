@@ -30,24 +30,32 @@ export class TurnoComponent implements OnInit {
   private deferredPrompt: any = null;
   instalarDisponible: boolean = false;
 
-  // Horas y minutos para el select
   horas: string[] = Array.from({ length: 12 }, (_, i) => String(i + 9).padStart(2, '0'));
   minutos: string[] = Array.from({ length: 12 }, (_, i) => String(i * 5).padStart(2, '0'));
+
+  fechaMinima: string = ''; // Para el input date
+  errorFecha: string = '';   // Mensaje de error
 
   constructor() {}
 
   ngOnInit(): void {
-    // Escucha el evento para permitir instalación PWA
+    // Configurar la fecha mínima para el input
+    const fechaHoy = new Date();
+    const yyyy = fechaHoy.getFullYear();
+    const mm = String(fechaHoy.getMonth() + 1).padStart(2, '0');
+    const dd = String(fechaHoy.getDate()).padStart(2, '0');
+    this.fechaMinima = `${yyyy}-${mm}-${dd}`;
+
+    // PWA events
     window.addEventListener('beforeinstallprompt', (event: Event) => {
       event.preventDefault();
       this.deferredPrompt = event;
-      this.instalarDisponible = true; // ahora se puede mostrar el botón
-      console.log('✅ Evento de instalación detectado');
+      this.instalarDisponible = true;
+      console.log('Evento de instalación detectado ✅');
     });
 
-    // Escucha si la app ya está instalada
     window.addEventListener('appinstalled', () => {
-      console.log('✅ Aplicación instalada');
+      console.log('Aplicación instalada ✅');
       this.deferredPrompt = null;
       this.instalarDisponible = false;
     });
@@ -56,14 +64,37 @@ export class TurnoComponent implements OnInit {
   abrirModal(serviceName: string): void {
     this.servicioSeleccionado = serviceName;
     this.showModal = true;
+    this.errorFecha = ''; // Limpiar error al abrir modal
   }
 
   closeModal(): void {
     this.showModal = false;
   }
 
+  validarFecha(fecha: string): boolean {
+    if (!fecha) {
+      this.errorFecha = 'Debe seleccionar una fecha';
+      return false;
+    }
+
+    const fechaIngresada = new Date(fecha);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    if (fechaIngresada < hoy) {
+      this.errorFecha = 'No se puede reservar un turno para una fecha pasada';
+      return false;
+    }
+
+    this.errorFecha = '';
+    return true;
+  }
+
   reservarTurno(form: NgForm): void {
     if (form.invalid) return;
+
+    // Validar fecha antes de guardar
+    if (!this.validarFecha(form.value.fecha)) return;
 
     const horaCompleta = `${form.value.hora}:${form.value.minutos}`;
 
@@ -114,9 +145,7 @@ export class TurnoComponent implements OnInit {
       return;
     }
 
-    // Muestra el prompt de instalación
     this.deferredPrompt.prompt();
-
     this.deferredPrompt.userChoice.then((choiceResult: any) => {
       if (choiceResult.outcome === 'accepted') {
         console.log('El usuario aceptó instalar la app');
