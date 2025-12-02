@@ -1,8 +1,7 @@
 # 💅 Turnera para Flor Nail Beauty
 
-Sistema de gestión de turnos online desarrollado para **Flor Nail Beauty**, un salón especializado en belleza de uñas.  
-Creado con **Angular**, **TypeScript**, **Node.js**, **Express** y desplegado en **Render**.  
-La aplicación también funciona como **PWA (Progressive Web App)**, lo que permite instalarla como aplicación móvil o de escritorio.
+Sistema de gestión de turnos online desarrollado para **Flower Nail Beauty**, un salón dedicado a la belleza de uñas.
+Creado con Angular, TypeScript y desplegado en Render, con soporte para PWA (Progressive Web App) para instalar la app en cualquier dispositivo.
 
 ---
 
@@ -14,14 +13,14 @@ La aplicación también funciona como **PWA (Progressive Web App)**, lo que perm
 
 ## 🧠 Descripción
 
-**Turnera para Flor Nail Beauty** es una aplicación web diseñada para que las clientas puedan reservar y gestionar fácilmente sus turnos con la manicurista.  
-El sistema se enfoca en la **comodidad y simplicidad** del uso diario.
+Turnera para Flower Nail Beauty es una aplicación web intuitiva que permite a las clientas reservar, ver y cancelar sus turnos de manera rápida y práctica.
+El objetivo del sistema es facilitar la organización diaria del salón mediante una interfaz simple, moderna y accesible desde cualquier dispositivo.
 
 ### ✨ Funcionalidades principales
 
 - 📅 **Ver horarios disponibles** para reservar turnos.  
 - 💅 **Reservar un turno** seleccionando fecha y hora.  
-- ❌ **Eliminar un turno** si la clienta no puede asistir.  
+- ❌ **Cancelar turnos** en caso de cambios o imprevistos.
 - 🧾 **Ver todos los turnos reservados.**  
 - 📱 **Instalar la app** directamente desde el navegador gracias a su soporte **PWA (Progressive Web App)**.
 
@@ -29,29 +28,27 @@ El sistema se enfoca en la **comodidad y simplicidad** del uso diario.
 
 ## 🛠️ Tecnologías utilizadas
 
-| Tipo | Tecnología |
-|------|-------------|
-| **Frontend** | Angular + TypeScript |
-| **Backend** | Node.js + Express |
-| **Base de datos** | JSON local |
-| **Despliegue** | Render |
-| **Aplicación instalable** | Progressive Web App (PWA) |
-| **Control de versiones** | Git / GitHub |
+ 🔹 Angular
 
+ 🔹 TypeScript
+
+ 🔹 Render para el backend
+
+ 🔹 MySQL para la base de datos.
+
+ 🔹 PWA (instalable como aplicación móvil o de escritorio)
 ---
 
 👩‍💻 Autores
 
-Florencia Andrea del Moral — Propietaria y fundadora de Flor Nail Beauty
-
-Yamila Sanchez, Florencia Sampietro, Valentina Olmos, Karina Maidana y Giuliana Manzo — Desarrolladores Fullstack / Deploy
+Yamila Sanchez, Florencia Sampietro, Valentina Olmos, Karina Maidana y Giuliana Manzo 
 
 ---
 
 
- Licencia — Flor Belleza Uñas
+ Licencia — Flower Nail Beauty
 
-Este software es de uso exclusivo para Flor Belleza Uñas (Flor Nail Beauty).
+Este software es de uso exclusivo para Flower Nail Beauty.
 No está permitido copiar, modificar, redistribuir ni utilizar este sistema sin autorización expresa de su propietaria.
 
-Todos los derechos reservados — © 2025 Flor Belleza Uñas
+Todos los derechos reservados — © 2025 Flower Nail Beauty
